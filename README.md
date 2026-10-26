@@ -4,7 +4,7 @@ An automated RSS feed generator for the [SSI updates page](https://ssi.inc/updat
 
 ## RSS Feed
 
-**Feed URL:** [https://raw.githubusercontent.com/<your-user>/<your-repo>/refs/heads/main/updates.rss](https://raw.githubusercontent.com/Baba-Yagan/ssi-rss/refs/heads/main/updates.rss)
+**Feed URL:** https://raw.githubusercontent.com/Baba-Yagan/ssi-rss/refs/heads/main/updates.rss
 
 ## About
 
