@@ -1,0 +1,47 @@
+name: Daily SSI Updates RSS Update
+
+on:
+  schedule:
+    # Run daily at 12:00 UTC
+    - cron: '0 12 * * *'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  update-updates:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        ref: main
+
+    - name: Run update script
+      run: |
+        chmod +x run.sh
+        ./run.sh
+
+    - name: Commit and push RSS updates
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+
+        # Generate timestamp
+        TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
+
+        # Add RSS file and database
+        git add updates.rss updates_entries.json
+
+        # Commit and push if there are changes
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "RSS update: $TIMESTAMP"
+          git push
+          echo "RSS feed updated and pushed to main branch"
+          echo "RSS feed available at: https://raw.githubusercontent.com/${{ github.repository }}/main/updates.rss"
+        fi
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
