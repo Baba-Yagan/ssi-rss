@@ -4,7 +4,7 @@ An automated RSS feed generator for the [SSI updates page](https://ssi.inc/updat
 
 ## RSS Feed
 
-**Feed URL:** `https://raw.githubusercontent.com/<your-user>/<your-repo>/refs/heads/main/updates.rss`
+**Feed URL:** [https://raw.githubusercontent.com/<your-user>/<your-repo>/refs/heads/main/updates.rss](https://raw.githubusercontent.com/Baba-Yagan/ssi-rss/refs/heads/main/updates.rss)
 
 ## About
 
@@ -20,9 +20,3 @@ The RSS feed is automatically updated daily to ensure you never miss new updates
 - **Update Frequency:** Daily (GitHub Actions cron at 12:00 UTC)
 - **Format:** RSS 2.0
 - **Language:** English
-
-### How it works
-
-- `run.sh` downloads the updates page with curl
-- `fin.py` parses the dated entries, diffs them against `updates_entries.json` (tracking when each entry was first seen, used as the item's `pubDate`), and writes `updates.rss`
-- `.github/workflows/daily-update.yml` runs the above daily and commits any feed changes back to `main`
